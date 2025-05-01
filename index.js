@@ -79,7 +79,7 @@ app.post('/web-data', async (req, res) => {
     const total = products.reduce((acc, product) => acc + product.price * product.quantity, 0);
     const productList = products.map((c) => `*${c.title}* — x${c.quantity}`).join(', ');
 
-    await bot.answerWebAppQuery(queryId, {
+    await bot.sendMessage(queryId, {
       type: "article",
       id: queryId,
       title: "Purchased Successfully",
