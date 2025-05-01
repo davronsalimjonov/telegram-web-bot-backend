@@ -32,7 +32,7 @@ const bootstrap = () => {
               [
                 {
                   text: "View Courses",
-                  web_app: { url: "https://telegram-web-bot-amber.vercel.app/" },
+                  web_app: { url: "https://salimjonovdavronwebtgbot.netlify.app/" },
                 },
               ],
             ],
