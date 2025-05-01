@@ -26,7 +26,7 @@ const bootstrap = () => {
         if (text === "/start") {
             await bot.sendMessage(chatId, "Welcome to Salimjonov Davron's Web App Bot!", {
                 reply_markup: {
-                    keyboard: [
+                    inline_keyboard: [
                         [
                             {
                                 text: "View Courses",
