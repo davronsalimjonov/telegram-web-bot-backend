@@ -1,4 +1,4 @@
-import TelegramBot from "node-telegram-bot-api";
+import TelegramBot from "node-telegram-bot-api"
 import express from "express";
 import cors from "cors";
 
@@ -14,6 +14,8 @@ bot.setMyCommands([
   { command: "/start", description: "Start the bot" },
   { command: "/courses", description: "View courses" },
 ]);
+
+bot.setMyDescription('This bot helps users browse and purchase full stack courses through a Telegram WebApp.')
 
 const bootstrap = () => {
   bot.on("message", async (msg) => {
