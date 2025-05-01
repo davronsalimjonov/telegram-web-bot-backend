@@ -11,8 +11,8 @@ app.use(express.json())
 app.use(cors())
 
 bot.setMyCommands([
-    {command: "/start", description: "Start the bot"},
-    {command: "/courses", description: "View courses"},
+    { command: "/start", description: "Start the bot" },
+    { command: "/courses", description: "View courses" },
 ])
 
 const bootstrap = () => {
@@ -52,36 +52,32 @@ const bootstrap = () => {
 
         if (msg.web_app_data?.data) {
             try {
-              const data = JSON.parse(msg.web_app_data.data);
-          
-              if (!Array.isArray(data) || data.length === 0) {
-                await bot.sendMessage(chatId, "Your cart is empty.");
-                return;
-              }
-          
-              let messageText = `🛒 *Your Orders:*\n\n`;
-          
-              data.forEach((item, index) => {
-                messageText += `${index + 1}. *${item.title}* — x${item.quantity}\n`;
-              });
-          
-              const total = data.reduce((acc, item) => acc + item.price * item.quantity, 0);
-          
-              messageText += `\n💵 *Total:* ${total.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD"
-              })}`;
-          
-              await bot.sendMessage(chatId, messageText, {
-                parse_mode: "Markdown"
-              });
-          
+                const data = JSON.parse(msg.web_app_data.data);
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    await bot.sendMessage(chatId, "Your cart is empty.");
+                    return;
+                }
+
+                let messageText = `🛒 *Your Orders:*\n\n`;
+
+                data.forEach((item, index) => {
+                    messageText += `${index + 1}. *${item.title}* — x${item.quantity}\n`;
+                });
+
+                const total = data.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+                messageText += `\n💵 *Total:* ${total.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD"
+                })}`;
+
+                await bot.sendMessage(chatId, messageText, { parse_mode: "Markdown" });
             } catch (error) {
-              console.error("Failed to parse web_app_data:", error);
-              await bot.sendMessage(chatId, "❌ Something went wrong processing your order.");
+                console.error("Failed to parse web_app_data:", error);
+                await bot.sendMessage(chatId, "❌ Something went wrong processing your order.");
             }
-          }
-          
+        }
     });
 }
 
@@ -103,8 +99,7 @@ app.post('/web-data', async (req, res) => {
                     .toLocaleString("en-US", {
                         style: "currency",
                         currency: "USD"
-                    })} worth of products. ${
-                        products.map(c => `*${c.title}* — x${c.quantity}X`).join(', ')
+                    })} worth of products. ${products.map(c => `*${c.title}* — x${c.quantity}X`).join(', ')
                     }`,
                 parse_mode: "Markdown",
             },
@@ -117,5 +112,4 @@ app.post('/web-data', async (req, res) => {
 
 app.listen(process.env.PORT || 8000, () => {
     console.log('Server started');
-    
 })
