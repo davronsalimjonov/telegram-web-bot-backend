@@ -99,9 +99,6 @@ app.post('/web-data', async (req, res) => {
   }
 });
 
-console.log('Hello world');
-
-
 app.listen(process.env.PORT || 8000, () => {
   console.log('Server started');
 });
